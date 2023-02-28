@@ -10,13 +10,13 @@ end
 class LoginResponse
     attr_accessor :status, :player_profile_image, :publisher_player_id, :player_name, :segments, :balance
 
-    def initialize(status, player_profile_image, publisher_player_id, player_name, segments, balance)
+    def initialize(status, player_profile_image, publisher_player_id, player_name, segments, balances)
         @status = status
         @player_profile_image = player_profile_image
         @publisher_player_id = publisher_player_id
         @player_name = player_name
         @segments = segments
-        @balance = balance
+        @balances = balances
     end
 
     def to_json
@@ -26,7 +26,7 @@ class LoginResponse
             :publisherPlayerId => @publisher_player_id,
             :playerName => @player_name,
             :segments => @segments,
-            :balance => @balance
+            :balances => @balances
         }
     end
     
