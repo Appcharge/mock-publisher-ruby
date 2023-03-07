@@ -55,7 +55,7 @@ class AuthController < Sinatra::Base
             return json_response
         
         # If the result is invalid, halt with a 400 error
-        elsif
+        else
             halt(400, "login failed")
         end
 
