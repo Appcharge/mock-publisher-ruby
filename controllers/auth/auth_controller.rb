@@ -15,11 +15,11 @@ class AuthController < Sinatra::Base
         # Decrypt the request body using AESDecryptor with the provided key and iv
         decrypted_body = Decryptor.decrypt(request_body)
 
-        auth_type = decrypted_body["authType"]
+        auth_method = decrypted_body["authMethod"]
 
         # authentication implementations
         result = nil
-        case auth_type
+        case auth_method
         when "facebook"
             app_id = decrypted_body["appId"]
             token = decrypted_body["token"]
@@ -27,7 +27,7 @@ class AuthController < Sinatra::Base
             # Verify the app_id and token with confirm_fb_login and get the result
             result = facebook_login(app_id, token)
         else
-            halt(400, "bad auth type: #{auth_type}")
+            halt(400, "bad auth method: #{auth_method}")
             return
         end
 
