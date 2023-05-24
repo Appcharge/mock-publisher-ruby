@@ -13,16 +13,22 @@ class AuthController < Sinatra::Base
         request_body = request.body.read
 
         # Decrypt the request body using AESDecryptor with the provided key and iv
-        decrypted_body = Decryptor.decrypt(request_body)
+        if request.env.key?("HTTP_SIGNATURE")
+            if SignatureService.check_signature(request_body, request.env["HTTP_SIGNATURE"])
+                body = JSON.parse(request_body)
+            end
+        else
+            body = Decryptor.decrypt(request_body)
+        end
 
-        auth_method = decrypted_body["authMethod"]
+        auth_method = body["authMethod"]
 
         # authentication implementations
         result = nil
         case auth_method
         when "facebook"
-            app_id = decrypted_body["appId"]
-            token = decrypted_body["token"]
+            app_id = body["appId"]
+            token = body["token"]
             
             # Verify the app_id and token with confirm_fb_login and get the result
             result = facebook_login(app_id, token)
