@@ -21,18 +21,18 @@ class PublisherPayload
                   :authType, :bundleName, :bundleId, :sku, :priceInCents, :currency,
                   :action, :actionStatus, :products, :publisherToken
   
-    def initialize(appChargePaymentId, purchaseDateAndTimeUtc, gameId, playerId, authType,
-                    bundleName, bundleId, sku, priceInCents, currency, action, actionStatus,
+    def initialize(appChargePaymentId, purchaseDateAndTimeUtc, gameId, playerId,
+                    bundleName, bundleId, sku, priceInCents, priceInDollar, currency, action, actionStatus,
                     products, publisherToken)
       @appChargePaymentId = appChargePaymentId
       @purchaseDateAndTimeUtc = purchaseDateAndTimeUtc
       @gameId = gameId
       @playerId = playerId
-      @authType = authType
       @bundleName = bundleName
       @bundleId = bundleId
       @sku = sku
       @priceInCents = priceInCents
+      @priceInCents = priceInDollar
       @currency = currency
       @action = action
       @actionStatus = actionStatus
