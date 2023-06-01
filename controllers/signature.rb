@@ -17,11 +17,13 @@ class SignatureService
   end
 
   def self.serialize_signature(signature)
-    signature_parts = signature.split(",")
-    timestamp = signature_parts[0]
-    timestamp["t="] = ""
-    signature = signature_parts[1]
-    signature["v1="] = ""
+    regex = /t=(.*),v1=(.*)/
+    match = regex.match(signature)
+    unless match && match.size >= 3
+      raise ArgumentError, "Invalid signature format"
+    end
+    timestamp = match[1]
+    signature = match[2]
     return timestamp, signature
 
   end
