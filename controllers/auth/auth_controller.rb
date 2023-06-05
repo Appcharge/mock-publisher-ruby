@@ -16,6 +16,8 @@ class AuthController < Sinatra::Base
         if request.env.key?("HTTP_SIGNATURE")
             if SignatureService.check_signature(request_body, request.env["HTTP_SIGNATURE"])
                 body = JSON.parse(request_body)
+            else
+                halt(401, "Wrong signature")
             end
         else
             body = Decryptor.decrypt(request_body)
