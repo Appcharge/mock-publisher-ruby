@@ -32,7 +32,7 @@ class PublisherPayload
       @bundleId = bundleId
       @sku = sku
       @priceInCents = priceInCents
-      @priceInCents = priceInDollar
+      @priceInDollar = priceInDollar
       @currency = currency
       @action = action
       @actionStatus = actionStatus
