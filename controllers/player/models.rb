@@ -19,10 +19,10 @@ end
 class PublisherPayload
     attr_accessor :appChargePaymentId, :purchaseDateAndTimeUtc, :gameId, :playerId,
                   :authType, :bundleName, :bundleId, :sku, :priceInCents, :currency,
-                  :action, :actionStatus, :products, :publisherToken
+                  :price, :action, :actionStatus, :products, :publisherToken
   
     def initialize(appChargePaymentId, purchaseDateAndTimeUtc, gameId, playerId,
-                    bundleName, bundleId, sku, priceInCents, priceInDollar, currency, action, actionStatus,
+                    bundleName, bundleId, sku, priceInCents, priceInDollar, currency, price, action, actionStatus,
                     products, publisherToken)
       @appChargePaymentId = appChargePaymentId
       @purchaseDateAndTimeUtc = purchaseDateAndTimeUtc
@@ -34,6 +34,7 @@ class PublisherPayload
       @priceInCents = priceInCents
       @priceInDollar = priceInDollar
       @currency = currency
+      @price = price
       @action = action
       @actionStatus = actionStatus
       @products = products
@@ -52,6 +53,7 @@ class PublisherPayload
             :sku => sku,
             :priceInCents => priceInCents,
             :currency => currency,
+            :price => price,
             :action => action,
             :actionStatus => actionStatus,
             :products => products,
