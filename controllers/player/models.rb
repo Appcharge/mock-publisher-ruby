@@ -19,11 +19,11 @@ end
 class PublisherPayload
     attr_accessor :appChargePaymentId, :purchaseDateAndTimeUtc, :gameId, :playerId,
                   :authType, :bundleName, :bundleId, :sku, :priceInCents, :currency,
-                  :price, :action, :actionStatus, :products, :publisherToken
+                  :action, :actionStatus, :products, :tax, :subTotal
   
     def initialize(appChargePaymentId, purchaseDateAndTimeUtc, gameId, playerId,
-                    bundleName, bundleId, sku, priceInCents, priceInDollar, currency, price, action, actionStatus,
-                    products, publisherToken)
+                    bundleName, bundleId, sku, priceInCents, priceInDollar, currency, action, actionStatus,
+                    products, tax, subTotal)
       @appChargePaymentId = appChargePaymentId
       @purchaseDateAndTimeUtc = purchaseDateAndTimeUtc
       @gameId = gameId
@@ -34,11 +34,11 @@ class PublisherPayload
       @priceInCents = priceInCents
       @priceInDollar = priceInDollar
       @currency = currency
-      @price = price
       @action = action
       @actionStatus = actionStatus
       @products = products
-      @publisherToken = publisherToken
+      @tax = tax
+      @subTotal = subTotal
     end
 
     def to_json
@@ -52,12 +52,13 @@ class PublisherPayload
             :bundleId => bundleId,
             :sku => sku,
             :priceInCents => priceInCents,
+            :priceInDollar => priceInDollar,
             :currency => currency,
-            :price => price,
             :action => action,
             :actionStatus => actionStatus,
             :products => products,
-            :publisherToken => publisherToken
+            :tax => tax,
+            :subTotal => subTotal,
             }
     end
 

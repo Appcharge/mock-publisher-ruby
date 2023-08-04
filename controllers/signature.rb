@@ -2,6 +2,11 @@ require 'openssl'
 
 key = ENV['KEY']
 
+if key.nil?
+  puts "Error: Missing required environment variable"
+  puts "required environment variables is KEY"
+  exit 1
+end
 
 class SignatureService
 
