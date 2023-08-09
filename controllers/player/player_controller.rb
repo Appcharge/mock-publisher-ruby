@@ -1,5 +1,4 @@
 require 'json'
-require_relative '../decryptor'
 require_relative '../signature'
 require_relative 'models'
 
@@ -15,15 +14,12 @@ class PlayerController < Sinatra::Base
         request_body = request.body.read
 
         # Decrypt the request body using AESDecryptor with the provided key and iv
-        if request.env.key?("HTTP_SIGNATURE")
-            if SignatureService.check_signature(request_body, request.env["HTTP_SIGNATURE"])
-                body = JSON.parse(request_body)
-            else
-                halt(401, "Wrong signature")
-            end
+        if SignatureService.check_signature(request_body, request.env["HTTP_SIGNATURE"])
+            body = JSON.parse(request_body)
         else
-            body = Decryptor.decrypt(request_body)
+            halt(401, "Wrong signature")
         end
+        
         products = body["products"].map do |product_hash|
             Product.new(product_hash["amount"], product_hash["sku"], product_hash["name"])
         end
