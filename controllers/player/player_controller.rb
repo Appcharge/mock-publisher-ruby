@@ -1,4 +1,5 @@
 require 'json'
+require 'sinatra/base'
 require_relative '../signature'
 require_relative 'models'
 
