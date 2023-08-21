@@ -1,4 +1,5 @@
 require 'openssl'
+require 'json'
 
 key = ENV['KEY']
 
